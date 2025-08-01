@@ -2,20 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Heart, ArrowDown } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 export default function RomanticProposal() {
-  const [scrollY, setScrollY] = useState(0);
-  const [showMessage1, setShowMessage1] = useState(false);
-  const [showMessage2, setShowMessage2] = useState(false);
-  const [showMessage3, setShowMessage3] = useState(false);
-  const [showLetter, setShowLetter] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [celebrationHearts, setCelebrationHearts] = useState<
     Array<{ id: number; x: number; y: number }>
@@ -61,15 +49,6 @@ export default function RomanticProposal() {
     }))
   );
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // Iniciar música automáticamente
   useEffect(() => {
     const startMusic = async () => {
@@ -79,7 +58,7 @@ export default function RomanticProposal() {
           audioRef.current.volume = 0.6; // Volumen al 60%
           await audioRef.current.play();
           setMusicStarted(true);
-        } catch (error) {
+        } catch {
           console.log(
             "Autoplay bloqueado, se reproducirá con la primera interacción del usuario"
           );
@@ -101,8 +80,8 @@ export default function RomanticProposal() {
           audioRef.current.volume = 0.6;
           await audioRef.current.play();
           setMusicStarted(true);
-        } catch (error) {
-          console.log("Error al reproducir música:", error);
+        } catch {
+          console.log("Error al reproducir música");
         }
       }
     };
@@ -118,21 +97,6 @@ export default function RomanticProposal() {
       });
     };
   }, [musicStarted]);
-
-  useEffect(() => {
-    if (scrollY > 1200) {
-      setTimeout(() => setShowMessage1(true), 1500);
-    }
-    if (scrollY > 2200) {
-      setTimeout(() => setShowMessage2(true), 1500);
-    }
-    if (scrollY > 3200) {
-      setTimeout(() => setShowMessage3(true), 1500);
-    }
-    if (scrollY > 4200) {
-      setTimeout(() => setShowLetter(true), 1500);
-    }
-  }, [scrollY]);
 
   const handleLetterClick = () => {
     // Crear corazones de celebración
@@ -310,40 +274,40 @@ export default function RomanticProposal() {
               Mi amor, mi vida, mi todo...
             </p>
 
-           <div className="text-xs">
-             <p className="text-base md:text-lg">
-              No sé cómo empezar a expresar lo que siento. Desde que llegaste a
-              mi vida, todo ha cambiado de una manera inesperada pero
-              increíblemente positiva.
-            </p>
-            <p className="text-base md:text-lg">
-              Tu manera de ver el mundo, tan única, me hace ver las cosas desde
-              una perspectiva diferente. Cada vez que hablas, me doy cuenta de
-              lo mucho que aprendo de ti, de lo genuino que es todo lo que dices
-              y de cómo tus palabras tienen la capacidad de calmar cualquier
-              momento de incertidumbre.
-            </p>
-            <p className="text-base md:text-lg">
-              Lo que más me atrae de ti es tu forma de ser, cómo logras
-              transmitir esa calma y alegría sin esfuerzo, cómo tu risa tiene un
-              efecto contagioso en todo lo que te rodea.
-            </p>
-            <p className="text-base md:text-lg">
-              A veces, solo escuchar tu manera de pensar me hace sentir que todo
-              tiene más sentido, y lo más curioso es que haces que hasta los
-              momentos más complicados se vuelvan más fáciles solo con tu
-              presencia, aunque no siempre estemos en el mismo lugar.
-            </p>
-            <p className="text-base md:text-lg">
-              Eres ese tipo de persona que, sin buscarlo, crea un espacio en el
-              que te sientes cómodo, tranquilo y escuchado.
-            </p>
-            <p className="text-base md:text-lg">
-              Me encanta descubrir cada día una nueva faceta de ti, y más aún
-              darme cuenta de lo afortunado que me siento al tener la
-              oportunidad de conocerte más.
-            </p>
-           </div>
+            <div className="text-xs">
+              <p className="text-base md:text-lg">
+                No sé cómo empezar a expresar lo que siento. Desde que llegaste
+                a mi vida, todo ha cambiado de una manera inesperada pero
+                increíblemente positiva.
+              </p>
+              <p className="text-base md:text-lg">
+                Tu manera de ver el mundo, tan única, me hace ver las cosas
+                desde una perspectiva diferente. Cada vez que hablas, me doy
+                cuenta de lo mucho que aprendo de ti, de lo genuino que es todo
+                lo que dices y de cómo tus palabras tienen la capacidad de
+                calmar cualquier momento de incertidumbre.
+              </p>
+              <p className="text-base md:text-lg">
+                Lo que más me atrae de ti es tu forma de ser, cómo logras
+                transmitir esa calma y alegría sin esfuerzo, cómo tu risa tiene
+                un efecto contagioso en todo lo que te rodea.
+              </p>
+              <p className="text-base md:text-lg">
+                A veces, solo escuchar tu manera de pensar me hace sentir que
+                todo tiene más sentido, y lo más curioso es que haces que hasta
+                los momentos más complicados se vuelvan más fáciles solo con tu
+                presencia, aunque no siempre estemos en el mismo lugar.
+              </p>
+              <p className="text-base md:text-lg">
+                Eres ese tipo de persona que, sin buscarlo, crea un espacio en
+                el que te sientes cómodo, tranquilo y escuchado.
+              </p>
+              <p className="text-base md:text-lg">
+                Me encanta descubrir cada día una nueva faceta de ti, y más aún
+                darme cuenta de lo afortunado que me siento al tener la
+                oportunidad de conocerte más.
+              </p>
+            </div>
 
             <p className="text-lg md:text-xl font-semibold text-center text-pink-600 mt-8">
               Por eso hoy, con todo mi corazón, te pregunto:
